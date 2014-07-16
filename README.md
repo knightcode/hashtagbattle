@@ -8,7 +8,11 @@ many times the hashtag was mentioned in the twitter stream since the time at
 which the battle began.
 
 Above this list of battles, is a small form by which anyone can add a new
-battle to the list.
+battle to the list. Upon entering two hashtags and submitting the form, a new
+battle will be added to the list with the respective counts starting at zero.
+
+The page periodically refreshes to update the counts. It maybe take a few
+minutes for the counts of a new battle to start updating.
 
 ## Simplifications/Hacks/Issues
 
