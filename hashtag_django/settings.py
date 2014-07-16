@@ -62,7 +62,7 @@ DATABASES = {
         'NAME': 'battle',
         'USER': 'battle',
         'PASSWORD': 'battle123',
-        'HOST': 'king',
+        'HOST': '192.168.0.100',
         'PORT': 3306
     }
 }
