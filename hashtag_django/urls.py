@@ -1,0 +1,11 @@
+from django.conf.urls import patterns, include, url
+from django.contrib import admin
+
+from views import BattlesView, CreateBattleView
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    url(r'^$', BattlesView.as_view(), name="main"),
+    url(r'create/$', CreateBattleView.as_view(), name="create"),
+    url(r'^admin/', include(admin.site.urls)),
+)

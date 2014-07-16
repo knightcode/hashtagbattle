@@ -1,0 +1,7 @@
+.hashtag {
+  display: inline-block;
+  min-width: 150px;
+}
+.hashtag .text {
+  padding-right: 10px;
+}

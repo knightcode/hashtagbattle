@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Hashtag Battle</title>
+        <meta name="description" content="Popularity comparison of hashtags">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="static/reset.css">
+        <link rel="stylesheet" href="static/normalize.css">
+        <link rel="stylesheet" href="static/main.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <form id=create-battle-form>
+          
+          <label>First Hashtag: <input id=left-hashtag type=text name=left-hashtag /></label>
+          <label>Second Hashtag: <input id=right-hashtag type=text name=right-hashtag /></label>
+          <input id=submit-create-battle type=submit value="Create Battle" />
+        </form>
+        <h1>Ongoing Battles</h1>
+        {% for bat in battles %}
+          <article class=battle>
+            <div class=hashtag><span class=text>{{ bat.left_hashtag.tag }}:</span> {{ bat.left_hashtag.count }}</div>
+            <div class=hashtag><span class=text>{{ bat.right_hashtag.tag }}:</span> {{ bat.right_hashtag.count }}</div>
+          </article>
+        {% endfor %}
+        <script src="static/main.js"></script>
+    </body>
+</html>

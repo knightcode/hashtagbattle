@@ -1,0 +1,6 @@
+#
+# Django DB Models for Hashtag Battle App
+#
+
+import django.models
+
