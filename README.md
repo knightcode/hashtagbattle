@@ -37,7 +37,8 @@ the reverse direction. For simplicity, each gets stored in the database. The
 backend queries and increments each count in the database, and it periodically
 collects a list of the unique hashtags from it as well. As such, there's a bit
 of a delay (currently set to a maximum of 3 minutes) before a new battle starts
-being filtered from the twitter stream. 
+getting filtered from the twitter stream.
+
 
 ## Dependencies
 - Django (tested on 1.6)
@@ -53,3 +54,12 @@ named _battle_, and password _battle123_ will need to be created on the server.
 the SQL script in the sql directory must also be executed on the database prior
 to starting the app.
 
+Django comes with a test server that can be brought up with the following
+command executed in the top level directory of the repo:
+
+```
+$ python manage.py runserver 0.0.0.0:8000
+```
+
+The parameter, `0.0.0.0:8000`, is optional, but a browser will only be able to
+connect to `localhost:8000`. This binds to any address.
