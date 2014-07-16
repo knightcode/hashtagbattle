@@ -1,5 +1,4 @@
-Hashtag Battle
-==============
+#Hashtag Battle
 
 This is a small, simple Django based web app that monitors the Twitter
 Streaming API for any mentions of a set of hashtags. Hashtags are arranged by
@@ -10,3 +9,12 @@ which the battle began.
 
 Above this list of battles, is a small form by which anyone can add a new
 battle to the list.
+
+## Simplifications/Hacks
+
+
+## Dependencies
+- Django (tested on 1.6)
+- Tweepy (python twitter client)
+
+## Setup
