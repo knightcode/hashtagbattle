@@ -14,5 +14,8 @@ class BattleTag(models.Model):
     count = models.IntegerField(default=0)
 
 class Battle(models.Model):
+    """
+      Represents a battle between two hashtags.
+    """
     left_hashtag = models.ForeignKey(BattleTag, related_name="left_battles")
     right_hashtag = models.ForeignKey(BattleTag, related_name="right_battles")

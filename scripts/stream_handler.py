@@ -1,7 +1,16 @@
 #!/usr/local/bin/python2.7
 # encoding: utf-8
 '''
-scripts.stream_handler -- shortdesc
+Processes the Twitter Streaming API in the background. At the moment, this
+includes all the hashtags the entire system wants to monitor, which isn't
+scalable. However, the set of all unique hashtags can be, with some work,
+partitioned into groups and distributed to seperate threads/processes/servers
+as needed.
+
+This script also queries the database for all hashtags periodically, which is
+really gross and inefficient. An improvement would be an implementation that
+relied upon a message passing architecture like beanstalk or rabbitMQ, through
+which new hashtags could be communicated from the front end to this script.
 
 @author:     PJ
 

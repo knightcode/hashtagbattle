@@ -1,4 +1,13 @@
+'''
+Main logic for the front end of the hashtag battles app. The app consists of
+two endpoints: (1) a full page that displays both the form to create new
+battles and the view of existing, on-going ones, and (2) an AJAX endpoint for
+submitting the two hashtags of a new battle, which just returns a JSON object
+string.
 
+@author:     PJ
+
+'''
 import json
 import os
 import subprocess
@@ -49,16 +58,25 @@ class CreateBattleView(View):
     def proccess_request(self, request, *args, **kwargs):
         left = request.GET.get('left', None)
         right = request.GET.get('right', None)
-        
+
+        # Sanitize inputs
         if not left and not right:
             print "Missing params: {0} {1}".format(left, right)
         print "Got {0} {1}".format(left, right)
         left = left.lower()
         right = right.lower()
-        print "Creating {0} {1}".format(left, right)
+        if left[0] != '#':
+            left = "#{0}".format(left)
+        if right[0] != '#':
+            right = "#{0}".format(right)
+
+        # Create objects in the database
         left_tag = BattleTag.objects.create(tag=left)
         right_tag = BattleTag.objects.create(tag=right)
-        print "Done"
         Battle.objects.create(left_hashtag=left_tag,
                                        right_hashtag=right_tag)
-        pass
+        return {'success': True,
+                'error_msg': '',
+                'left_hashtag': left,
+                'right_hashtag': right
+                }

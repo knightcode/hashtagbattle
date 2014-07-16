@@ -18,13 +18,17 @@
           <label>Second Hashtag: <input id=right-hashtag type=text name=right-hashtag /></label>
           <input id=submit-create-battle type=submit value="Create Battle" />
         </form>
+        <section class=messages>
+        </section>
         <h1>Ongoing Battles</h1>
+        <section class=battles>
         {% for bat in battles %}
           <article class=battle>
             <div class=hashtag><span class=text>{{ bat.left_hashtag.tag }}:</span> {{ bat.left_hashtag.count }}</div>
             <div class=hashtag><span class=text>{{ bat.right_hashtag.tag }}:</span> {{ bat.right_hashtag.count }}</div>
           </article>
         {% endfor %}
+        </section>
         <script src="static/main.js"></script>
     </body>
 </html>

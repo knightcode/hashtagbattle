@@ -1,3 +1,9 @@
+'''
+URL paths for the hashtag battle app 
+
+@author:     PJ
+
+'''
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
