@@ -14,14 +14,17 @@
     </head>
     <body>
         <div class=container>
+            <header class=main-header>
+                <h1>Hashtag Battles</h1>
+                <div class=add-battle>+</div>
+            </header>
             <form id=create-battle-form>
-                <label>First Hashtag: <input id=left-hashtag type=text name=left-hashtag /></label>
-                <label>Second Hashtag: <input id=right-hashtag type=text name=right-hashtag /></label>
-                <input id=submit-create-battle type=submit value="Create Battle" />
+                <label for=left-hashtag>First Hashtag: <input id=left-hashtag type=text name=left-hashtag /></label>
+                <label for=right-hashtag>Second Hashtag: <input id=right-hashtag type=text name=right-hashtag /></label>
+                <div class=submit-bar><input id=submit-create-battle type=submit value="Create Battle" /></div>
             </form>
             <section class=messages>
             </section>
-            <h1>Hashtag Battles</h1>
             <section class=battles>
             </section>
         </div>

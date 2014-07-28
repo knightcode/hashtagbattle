@@ -1,7 +1,79 @@
+.container {
+  width: 500px;
+  position: relative;
+  margin: auto;
+}
+.main-header {
+  text-align: center;
+}
+.main-header h1 {
+  display: inline-block;
+  margin: 10px 0 10px 0;
+}
+
+.add-battle {
+  position: absolute;
+  display: inline-block;
+  top: 13px;
+  left: 380px;
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid darkgrey;
+}
+
+#create-battle-form {
+  display: none;
+  width: 340px;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+#create-battle-form  label {
+  display: block;
+  text-align: right;
+  margin-bottom: 5px;
+}
+#create-battle-form  input[type="text"] {
+  width: 210px;
+}
+.submit-bar {
+  text-align: center;
+}
+#create-battle-form  #submit-create-battle {
+  -webkit-appearance: none;
+  width: 200px;
+  height: 50px;
+  color: white;
+  background-color: rgb(43, 213, 43);
+  border: none;
+}
+.battles {
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+.battle {
+  text-align: center;
+  border-top: 1px solid rgb(235, 235, 235);
+  border-left: 1px solid rgb(235, 235, 235);
+  border-right: 1px solid rgb(235, 235, 235);
+  padding: 5px 0;
+  box-sizing: border-box;
+}
 .hashtag {
   display: inline-block;
-  min-width: 150px;
+  width: 50%;
 }
 .hashtag .text {
-  padding-right: 10px;
+  font-size: 25px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hashtag .count {
+  font-size: 18px;
 }

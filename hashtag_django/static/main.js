@@ -6,19 +6,30 @@
     var socket,
         timeout,
         battles = {},
+        showing_form = false,
         battle_template = function (context) {
             return "<article class='battle battle-" +
                 context.battle_id +
-                "'><div class=hashtag><span class=text>" +
-                context.left_hashtag +
-                ":</span> <span class=count>" +
+                "'><div class=hashtag><div class=text>" +
+                context.left_hashtag.substring(1) +
+                "</div> <div class=count>" +
                 context.left_count +
-                "</span></div><div class=hashtag><span class=text>" +
-                context.right_hashtag +
-                ":</span> <span class=count>" +
+                "</div></div><div class=hashtag><div class=text>" +
+                context.right_hashtag.substring(1) +
+                "</div> <div class=count>" +
                 context.right_count +
-                "</span</div></article>";
+                "</div></div></article>";
         };
+    $('.add-battle').on('click', function(evt) {
+        if (showing_form) {
+            $('#create-battle-form').slideUp();
+            $('.add-battle').text('+');
+        } else {
+            $('#create-battle-form').slideDown();
+            $('.add-battle').html('&ndash;');
+        }
+        showing_form = !showing_form;
+    });
     $('#create-battle-form').submit(function (event) {
         var first_tag = $('#left-hashtag').val(),
             second_tag = $('#right-hashtag').val()
