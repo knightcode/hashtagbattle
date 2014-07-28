@@ -17,10 +17,11 @@ from django.http.response import HttpResponse
 from django.views.generic import TemplateView, View
 
 from hashtag_django.models import BattleTag, Battle
+from hashtag_django.stream_handler import ensure_running_updater, new_battle
 
 # Reference to the stream_handler background script
 # This is a quick-n-dirty approach to background processing
-background_script = None
+#background_script = None
 
 
 class BattlesView(TemplateView):
@@ -29,11 +30,7 @@ class BattlesView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         global background_script
         context = super(BattlesView, self).get_context_data(*args, **kwargs)
-        context['battles'] = Battle.objects.all().select_related(
-                                        'left_hashtag', 'right_hashtag')
-        if len(context['battles']) > 0 and background_script is None:
-            background_script = subprocess.Popen([sys.executable,
-                            'scripts/stream_handler.py'])
+        ensure_running_updater()
         return context
 
 
@@ -73,10 +70,14 @@ class CreateBattleView(View):
         # Create objects in the database
         left_tag = BattleTag.objects.create(tag=left)
         right_tag = BattleTag.objects.create(tag=right)
-        Battle.objects.create(left_hashtag=left_tag,
+        battle = Battle.objects.create(left_hashtag=left_tag,
                                        right_hashtag=right_tag)
+        new_battle(battle)
         return {'success': True,
                 'error_msg': '',
+                'battle_id': battle.id,
                 'left_hashtag': left,
-                'right_hashtag': right
+                'left_count': 0,
+                'right_hashtag': right,
+                'right_count': 0
                 }

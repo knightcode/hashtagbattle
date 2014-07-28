@@ -13,9 +13,16 @@ class BattleTag(models.Model):
     tag = models.CharField(max_length=100)
     count = models.IntegerField(default=0)
 
+    def get_battle(self):
+        if hasattr(self, 'left_battle'):
+            return self.left_battle
+        else:
+            return self.right_battle
+
+
 class Battle(models.Model):
     """
       Represents a battle between two hashtags.
     """
-    left_hashtag = models.ForeignKey(BattleTag, related_name="left_battles")
-    right_hashtag = models.ForeignKey(BattleTag, related_name="right_battles")
+    left_hashtag = models.OneToOneField(BattleTag, related_name="left_battle")
+    right_hashtag = models.OneToOneField(BattleTag, related_name="right_battle")

@@ -2,10 +2,26 @@
 // Handler for sanitizing and sending new battles to the server. 
 //
 (function ($) {
+
+    var socket,
+        timeout,
+        battles = {},
+        battle_template = function (context) {
+            return "<article class='battle battle-" +
+                context.battle_id +
+                "'><div class=hashtag><span class=text>" +
+                context.left_hashtag +
+                ":</span> <span class=count>" +
+                context.left_count +
+                "</span></div><div class=hashtag><span class=text>" +
+                context.right_hashtag +
+                ":</span> <span class=count>" +
+                context.right_count +
+                "</span</div></article>";
+        };
     $('#create-battle-form').submit(function (event) {
         var first_tag = $('#left-hashtag').val(),
             second_tag = $('#right-hashtag').val()
-        console.log("hello");
         event.preventDefault();
 
         // Sanitize inputs
@@ -30,13 +46,10 @@
                 right: second_tag
             },
             success: function (data) {
-                if (data.success){ 
+                if (data.success) {
+                    battles[data.battle_id] = true;
                     $('.messages').append("<div class=message>Success!</div>");
-                    $('.battles').append("<article class=battle><div class=hashtag><span class=text>" +
-                            data.left_hashtag +
-                            ":</span> 0</div><div class=hashtag><span class=text>" +
-                            data.right_hashtag +
-                            ":</span> 0</div></article>");
+                    $('.battles').append(battle_template(data));
                 }
             },
             error: function () {
@@ -44,9 +57,29 @@
             }
         });
     });
-    
-    timeout = setTimeout(function () {
-        console.log("refreshing");
-        window.location.reload();
-    }, 60000);
+
+    socket = io.connect("/battles");
+
+    socket.on('connect', function () {
+        console.log("connected");
+        socket.emit('getAllBattles');
+    });
+    socket.on('allBattles', function (data) {
+        var i = 0, len = data.battles.length,
+            $battles = $('.battles'),
+            bid;
+        for(; i < len; i++) { // This runs fastest
+            bid = data.battles[i].battle_id
+            if (!(bid in battles)) {
+                battles[bid] = true;
+                $battles.append(battle_template(data.battles[i]));
+            }
+        }
+    });
+
+    socket.on('updatedBattle', function (data) {
+        var $batCounts = $('.battle-' + data.battle_id + ' .count');
+        $batCounts[0].innerText = data.left_count;
+        $batCounts[1].innerText = data.right_count;
+    });
 })(jQuery)
